@@ -6,4 +6,4 @@ let fromString = Parse.fromString
 
 let fromFile = Parse.fromFile
 
-let compileToFile = Compile.contCompileToFile
+let compileToFile = Comp.compileToFile
