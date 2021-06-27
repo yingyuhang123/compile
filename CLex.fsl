@@ -93,6 +93,9 @@ rule Token = parse          // 每个 规则rule 会生成为一个函数，函�
                                                              //调用 Token 规则函数继续注释部分后面的处理
   | "/*"            { Comment lexbuf; Token lexbuf }   // 多行注释，调用 Comment规则
   | "(*"            { SecComment lexbuf; Token lexbuf }   // 多行注释，调用 SecComment规则
+  | "<*"            { AComment lexbuf; Token lexbuf }   // 多行注释，调用 AComment规则
+  | "{*"            { BComment lexbuf; Token lexbuf }   // 多行注释，调用 BComment规则
+  | "[*"            { CComment lexbuf; Token lexbuf }   // 多行注释，调用 CComment规则
   | '"'             { CSTSTRING (String [] lexbuf) }   // 调用字符串处理规则
   | eof             { EOF }
   | _               { failwith "Lexer error: illegal symbol" }
@@ -110,6 +113,28 @@ and SecComment = parse
    | '\n'           { lexbuf.EndPos <- lexbuf.EndPos.NextLine; SecComment lexbuf } //注释跨行处理
    | (eof | '\026') { failwith "Lexer error: unterminated comment" }  // 多行注释未封闭
    | _              { SecComment lexbuf }  // 其他任意情况都继续处理后续字符
+
+and AComment = parse
+   | "<*"           { AComment lexbuf; AComment lexbuf }  // 注释的嵌套处理
+   | "*>"           { () }                           // 注释处理结束
+   | '\n'           { lexbuf.EndPos <- lexbuf.EndPos.NextLine; AComment lexbuf } //注释跨行处理
+   | (eof | '\026') { failwith "Lexer error: unterminated comment" }  // 多行注释未封闭
+   | _              { AComment lexbuf }  // 其他任意情况都继续处理后续字符
+
+and BComment = parse
+   | "{*"           { BComment lexbuf; BComment lexbuf }  // 注释的嵌套处理
+   | "*}"           { () }                           // 注释处理结束
+   | '\n'           { lexbuf.EndPos <- lexbuf.EndPos.NextLine; BComment lexbuf } //注释跨行处理
+   | (eof | '\026') { failwith "Lexer error: unterminated comment" }  // 多行注释未封闭
+   | _              { BComment lexbuf }  // 其他任意情况都继续处理后续字符
+
+and CComment = parse
+   | "[*"           { CComment lexbuf; CComment lexbuf }  // 注释的嵌套处理
+   | "*]"           { () }                           // 注释处理结束
+   | '\n'           { lexbuf.EndPos <- lexbuf.EndPos.NextLine; CComment lexbuf } //注释跨行处理
+   | (eof | '\026') { failwith "Lexer error: unterminated comment" }  // 多行注释未封闭
+   | _              { CComment lexbuf }  // 其他任意情况都继续处理后续字符
+
 
 and EndLineComment = parse
    | '\n'           { lexbuf.EndPos <- lexbuf.EndPos.NextLine }  //更新行尾位置，返回
