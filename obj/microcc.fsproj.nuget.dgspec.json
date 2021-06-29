@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\microcc.fsproj": {}
+    "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc - 副本\\microcc.fsproj": {}
   },
   "projects": {
-    "d:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\microcc.fsproj": {
+    "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc - 副本\\microcc.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\microcc.fsproj",
+        "projectUniqueName": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc - 副本\\microcc.fsproj",
         "projectName": "microcc",
-        "projectPath": "d:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\microcc.fsproj",
+        "projectPath": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc - 副本\\microcc.fsproj",
         "packagesPath": "C:\\Users\\ying\\.nuget\\packages\\",
-        "outputPath": "d:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\obj\\",
+        "outputPath": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc - 副本\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ying\\AppData\\Roaming\\NuGet\\NuGet.Config"

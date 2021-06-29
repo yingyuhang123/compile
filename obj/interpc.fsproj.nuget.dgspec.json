@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\interpc.fsproj": {}
+    "D:\\大学\\大三下\\编程语言原理与编译\\microc\\interpc.fsproj": {}
   },
   "projects": {
-    "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\interpc.fsproj": {
+    "D:\\大学\\大三下\\编程语言原理与编译\\microc\\interpc.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\interpc.fsproj",
+        "projectUniqueName": "D:\\大学\\大三下\\编程语言原理与编译\\microc\\interpc.fsproj",
         "projectName": "interpc",
-        "projectPath": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\interpc.fsproj",
+        "projectPath": "D:\\大学\\大三下\\编程语言原理与编译\\microc\\interpc.fsproj",
         "packagesPath": "C:\\Users\\ying\\.nuget\\packages\\",
-        "outputPath": "D:\\大学\\大三下\\编程语言原理与编译\\plzoofs\\microc\\obj\\",
+        "outputPath": "D:\\大学\\大三下\\编程语言原理与编译\\microc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ying\\AppData\\Roaming\\NuGet\\NuGet.Config"

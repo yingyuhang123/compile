@@ -15,10 +15,7 @@ type label = string
 // 汇编指令
 type instr =
   | Label of label                     (* symbolic label; pseudo-instruc. *)
-  | FLabel of int * label                     (* symbolic label; pseudo-instruc. *)
   | CSTI of int                        (* constant                        *)
-  | OFFSET of int                        (* constant     偏移地址  x86     *) 
-  | GVAR of int                        (* global var     全局变量  x86     *) 
   | ADD                                (* addition                        *)
   | SUB                                (* subtraction                     *)
   | MUL                                (* multiplication                  *)
@@ -42,7 +39,7 @@ type instr =
   | RET of int                         (* pop m and return to s[sp]       *)
   | PRINTI                             (* print s[sp] as integer          *)
   | PRINTC                             (* print s[sp] as character        *)
-  | LDARGS of int                             (* load command line args on stack *)
+  | LDARGS of int                            (* load command line args on stack *)
   | STOP                               (* halt the abstract machine       *)
 
 (* Generate new distinct labels *)
@@ -180,10 +177,7 @@ let makelabenv (addr, labenv) instr =
     match instr with
     // 记录当前 (标签, 地址) ==> 到 labenv中
     | Label lab      -> (addr, (lab, addr) :: labenv)
-    | FLabel (m,lab)      -> (addr, (lab, addr) :: labenv)
     | CSTI i         -> (addr+2, labenv)
-    | GVAR i         -> (addr+2, labenv)
-    | OFFSET i       -> (addr+2, labenv)
     | ADD            -> (addr+1, labenv)
     | SUB            -> (addr+1, labenv)
     | MUL            -> (addr+1, labenv)
@@ -207,7 +201,7 @@ let makelabenv (addr, labenv) instr =
     | RET m          -> (addr+2, labenv)
     | PRINTI         -> (addr+1, labenv)
     | PRINTC         -> (addr+1, labenv)
-    | LDARGS  m       -> (addr+1, labenv)
+    | LDARGS m        -> (addr+1, labenv)
     | STOP           -> (addr+1, labenv)
 
 (* Bytecode emission, second pass: output bytecode as integers *)
@@ -218,10 +212,7 @@ let makelabenv (addr, labenv) instr =
 let rec emitints getlab instr ints = 
     match instr with
     | Label lab      -> ints
-    | FLabel (m,lab) -> ints
     | CSTI i         -> CODECSTI   :: i :: ints
-    | GVAR i         -> CODECSTI   :: i :: ints
-    | OFFSET i       -> CODECSTI   :: i :: ints
     | ADD            -> CODEADD    :: ints
     | SUB            -> CODESUB    :: ints
     | MUL            -> CODEMUL    :: ints
@@ -302,7 +293,7 @@ let rec decomp ints : instr list =
     | CODERET    :: m :: ints_rest                    ->   RET m         :: decomp ints_rest
     | CODEPRINTI :: ints_rest                         ->   PRINTI        :: decomp ints_rest
     | CODEPRINTC :: ints_rest                         ->   PRINTC        :: decomp ints_rest
-    | CODELDARGS :: ints_rest                         ->   LDARGS 0       :: decomp ints_rest
+    | CODELDARGS :: m :: ints_rest                    ->   LDARGS m       :: decomp ints_rest
     | CODESTOP   :: ints_rest                         ->   STOP             :: decomp ints_rest
     | CODECSTI   :: i :: ints_rest                    ->   CSTI i :: decomp ints_rest       
     | _                                       ->    printf "%A" ints; failwith "unknow code"
